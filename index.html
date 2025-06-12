@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Tool Tài Xỉu MD5 SumClub Siêu Chính Xác</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #101020, #000000);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: rgba(255,255,255,0.05);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #00f0ff;
+      text-align: center;
+      width: 90%;
+      max-width: 600px;
+    }
+    h1 {
+      color: #00f0ff;
+      margin-bottom: 30px;
+      font-size: 28px;
+    }
+    input {
+      width: 100%;
+      padding: 16px;
+      font-size: 20px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      background: #111;
+      color: #0ff;
+      text-align: center;
+      margin-bottom: 20px;
+      box-shadow: inset 0 0 8px #00f0ff;
+    }
+    button {
+      padding: 14px 32px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: linear-gradient(90deg, #00f0ff, #0077ff);
+      color: #fff;
+      box-shadow: 0 0 12px #00f0ff;
+    }
+    button:hover {
+      box-shadow: 0 0 20px #00f0ff;
+    }
+    #result {
+      margin-top: 25px;
+      font-size: 26px;
+      font-weight: bold;
+      color: #00ffcc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Dự Đoán Tài/Xỉu từ Mã MD5<br>SUMCLUB ⚙️ AI</h1>
+    <input type="text" id="md5Input" placeholder="Dán mã MD5...">
+    <button onclick="predict()">Dự Đoán</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function predict() {
+      const md5 = document.getElementById("md5Input").value.toLowerCase().replace(/[^a-f0-9]/g, "");
+      if (md5.length < 32) {
+        document.getElementById("result").innerHTML = "❌ Mã MD5 không hợp lệ!";
+        return;
+      }
+
+      // Lấy 5 ký tự đầu và 5 ký tự cuối → tạo độ ngẫu nhiên có tính đặc trưng hơn
+      const first5 = md5.substring(0, 5);
+      const last5 = md5.substring(md5.length - 5);
+      const full = first5 + last5;
+
+      let score = 0;
+      for (let i = 0; i < full.length; i++) {
+        const ch = full[i];
+        if ('13579bdf'.includes(ch)) score++;
+        else score--;
+      }
+
+      const result = score >= 0 ? "<span style='color:#FFD700'>🎯 TÀI</span>" : "<span style='color:#ff5050'>🎯 XỈU</span>";
+      document.getElementById("result").innerHTML = result;
+    }
+  </script>
+</body>
+</html>
